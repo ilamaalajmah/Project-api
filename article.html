@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Articles - Personal Blog</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <nav>
+        <div class="logo">Personal Blog</div>
+        <ul class="nav-links">
+            
+        </ul>
+    </nav>
+
+    <main>
+        <h1>Articles</h1>
+        <div class="article-section">
+            <form id="article-form">
+                <input type="text" id="article-title" placeholder="Title" required>
+                <textarea id="article-content" placeholder="Content" required></textarea>
+                <input type="file" id="article-image" accept="image/*">
+                <img id="image-preview" style="display: none; max-width: 300px;">
+                <button type="submit">Publish Article</button>
+            </form>
+        </div>
+        <div id="user-articles"></div>
+    </main>
+
+    <script src="script.js"></script>
+</body>
+</html>
