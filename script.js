@@ -1,5 +1,6 @@
-const API_BASE_URL = "https://66e9b7ef87e41760944a820d.mockapi.io";
-
+// API base URL
+const API_BASE_URL = "https://66ea4de055ad32cda4784edf.mockapi.io";
+// Helper functions
 function getLoggedInUser() {
     return JSON.parse(localStorage.getItem("loggedInUser"));
 }
@@ -48,6 +49,7 @@ async function deleteArticle(articleId) {
     return await apiRequest(`articles/${articleId}`, "DELETE");
 }
 
+// Update article form visibility
 function updateArticleFormVisibility() {
     const user = getLoggedInUser();
     if (articleSection) {
@@ -59,6 +61,7 @@ function updateArticleFormVisibility() {
     }
 }
 
+// Registration
 const registerForm = document.getElementById("register-form");
 if (registerForm) {
     registerForm.addEventListener("submit", async (e) => {
@@ -96,6 +99,7 @@ if (registerForm) {
     });
 }
 
+// Login
 const loginForm = document.getElementById("login-form");
 if (loginForm) {
     loginForm.addEventListener("submit", async (e) => {
@@ -118,6 +122,7 @@ if (loginForm) {
     });
 }
 
+// Profile
 const profileInfo = document.getElementById("profile-info");
 const editProfileBtn = document.getElementById("edit-profile-btn");
 const editProfileForm = document.getElementById("edit-profile-form");
@@ -184,6 +189,7 @@ if (editProfileForm) {
     });
 }
 
+// Article creation
 const articleForm = document.getElementById("article-form");
 const articleSection = document.querySelector(".article-section");
 const imagePreview = document.getElementById("image-preview");
@@ -247,6 +253,7 @@ if (articleForm) {
     });
 }
 
+// Display user articles
 async function displayUserArticles() {
     const userArticles = document.getElementById("user-articles");
     if (userArticles) {
@@ -274,6 +281,7 @@ async function displayUserArticles() {
             </div>
         `).join("");
 
+        // Add event listeners for delete buttons
         const deleteButtons = userArticles.querySelectorAll(".delete-article");
         deleteButtons.forEach((button) => {
             button.addEventListener("click", async (e) => {
@@ -285,6 +293,7 @@ async function displayUserArticles() {
     }
 }
 
+// Display all articles on home page
 const articlesContainer = document.getElementById("articles-container");
 if (articlesContainer) {
     getArticles().then((articles) => {
@@ -305,15 +314,19 @@ if (articlesContainer) {
     });
 }
 
+// Call displayUserArticles on article.html page load
 if (window.location.pathname.includes("article.html")) {
     displayUserArticles();
 }
 
+// Call this function when logging in or out
 function updateUIForAuthState() {
     updateArticleFormVisibility();
     updateNavbar();
+    // Add any other UI updates here
 }
 
+// Add this function to update the navigation bar
 function updateNavbar() {
     const navLinks = document.querySelector(".nav-links");
     const user = getLoggedInUser();
@@ -326,6 +339,7 @@ function updateNavbar() {
                 <li><a href="profile.html">Profile</a></li>
                 <li><a href="#" id="logout-link">Logout</a></li>
             `;
+            // Add event listener for logout
             document.getElementById("logout-link").addEventListener(
                 "click",
                 (e) => {
@@ -346,8 +360,10 @@ function updateNavbar() {
     }
 }
 
+// Call updateUIForAuthState on page load
 document.addEventListener("DOMContentLoaded", updateUIForAuthState);
 
+// Full article view
 const fullArticleContainer = document.getElementById("full-article");
 if (fullArticleContainer) {
     const urlParams = new URLSearchParams(window.location.search);
@@ -381,6 +397,7 @@ function displayFullArticle(article) {
     `;
 }
 
+// Helper function to convert file to base64
 function fileToBase64(file) {
     return new Promise((resolve, reject) => {
         const reader = new FileReader();
